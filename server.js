@@ -7,7 +7,7 @@ const port = 3055
 const configureDB = require('./app/config/db')
 const userCltr = require('./app/controllers/user-controller')
 
-const userRegistrationSchema = require('./app/validators/user-validation-schema')
+const {userRegistrationSchema, userLoginSchema} = require('./app/validators/user-validation-schema')
 
 configureDB()
 
@@ -18,7 +18,7 @@ app.use(cors())
 
 
 app.post('/api/user-register',checkSchema(userRegistrationSchema),userCltr.register)
-
+app.post('/api/user-login',checkSchema(userLoginSchema),userCltr.login)
 
 
 

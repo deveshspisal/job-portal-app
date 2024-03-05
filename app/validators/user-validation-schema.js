@@ -40,4 +40,31 @@ const userRegistrationSchema = {
     }
 }
 
-module.exports = userRegistrationSchema
+const userLoginSchema = {
+    email : {
+        notEmpty : {
+            errorMessage : "Email id is required"
+        },
+        isEmail : {
+            errorMessage : "Enter a valid email" 
+        },
+        trim : true,
+        normalizeEmail : true
+    },
+
+    password : {
+        notEmpty : {
+            errorMessage : "Password is required"
+        },
+        isLength : {
+            options : {min : 8 , max : 128},
+            errorMessage : "Password should be of 8 to 128 characters"
+            }
+        },
+        trim : true,
+    }
+
+module.exports = {
+    userRegistrationSchema : userRegistrationSchema,
+    userLoginSchema  : userLoginSchema
+}
