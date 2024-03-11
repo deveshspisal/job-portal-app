@@ -37,6 +37,15 @@ const userRegistrationSchema = {
             errorMessage  : "Password should between 8 to 128 characters"
         },
         trim : true
+    },
+    role : {
+        notEmpty : {
+            errorMessage : "Role is required"
+        },
+        isIn : {
+            options : [['candidate, recruiter']],
+            errorMessage : "Select from above message"
+        }
     }
 }
 

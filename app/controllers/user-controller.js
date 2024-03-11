@@ -46,7 +46,8 @@ userCltr.login = async (req,res) =>{
             res.status(400).json({error : 'Enter correct email or password'})
         }else{
             const tokenData = {
-                id : data._id
+                id : data._id,
+                role : data.role
             }
             const token = jwt.sign(tokenData, 'India@11', {expiresIn: '7d'})
             res.status(201).json({token : token})
@@ -55,6 +56,16 @@ userCltr.login = async (req,res) =>{
     }catch(err){
         console.log(err);
         res.status(500).json('Internal Server error')
+    }
+}
+
+userCltr.account = async (req, res) =>{
+    try{
+        const user = await User.findById(req.currentUser.id).select({password : 0})
+        res.json(user)
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : 'Internal Server Error'})
     }
 }
 
